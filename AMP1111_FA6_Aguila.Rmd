@@ -1,0 +1,181 @@
+---
+title: "Formative Assessment 6"
+author: "Vera Aguila"
+date: "2024-09-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problem 1
+
+Table 1 shows a frequency distribution of grades on a final examination in college algebra. Find the quartiles of the distribution.
+
+| Grade  | Number of Students |
+|--------|--------------------|
+| 90-99  | 9                  |
+| 80-89  | 32                 |
+| 70-79  | 43                 |
+| 60-69  | 21                 |
+| 50-59  | 11                 |
+| 40-49  | 3                  |
+| 30-39  | 1                  |
+| *Total* | *120*             |
+
+```{r}
+grades <- c(rep(95, 9), rep(85, 32), rep(75, 43), rep(65, 21), rep(55, 11), rep(45, 3), rep(35, 1))
+
+quartiles <- quantile(grades, probs = c(0.25, 0.5, 0.75))
+quartiles
+```
+<br>
+
+## Problem 2
+
+On a final examination in statistics, the mean grade of a group of 150 students was 78 and the standard deviation was 8.0. In algebra, however, the mean final grade of the group was 73 and the standard deviation was 7.6. In which subject was there the greater:
+
+Data
+
+We have the following data for the final grades:
+
+- **Statistics**
+  - Mean: 78
+  - Standard Deviation: 8.0
+
+- **Algebra**
+  - Mean: 73
+  - Standard Deviation: 7.6
+
+
+(a) absolute dispersion and (b) relative dispersion
+The standard deviation values are:
+
+```{r 2}
+sd_statistics <- 8.0
+sd_algebra <- 7.6
+
+sd_statistics
+sd_algebra
+
+mean_statistics <- 78
+mean_algebra <- 73
+
+cv_statistics <- (sd_statistics / mean_statistics) * 100
+cv_algebra <- (sd_algebra / mean_algebra) * 100
+
+cv_statistics
+cv_algebra
+```
+
+<br>
+
+
+
+<br>
+
+## Problem 3
+Prove that the mean and standard deviation of a set of standard scores are equal to 0 and 1, respectively. Use the following problem to illustrate this: Convert the
+set 6, 2, 8, 7, 5 into standard scores.
+
+```{r 3}
+values <- c(6, 2, 8, 7, 5)
+
+mean_values <- mean(values) 
+std_dev_values <- sd(values) 
+
+z_scores <- (values - mean_values) / std_dev_values
+
+mean_z_scores <- mean(z_scores)
+std_dev_z_scores <- sd(z_scores)
+
+mean_values
+std_dev_values
+z_scores
+mean_z_scores
+std_dev_z_scores
+
+```
+The mean of z-scores:
+
+- The z-scores are centered around the mean, which is 0 by definition.
+- The mean of the z-scores should be 0, as for any set of z-scores, the sum of the differences from the mean divided by the standard deviation always equals 0.
+
+
+
+
+<br>
+
+## Problem 4
+Three masses are measured as 20.48, 35.97, and 62.34 g, with standard deviations of 0.21, 0.46, and 0.54 g, respectively. Find the: 
+<br>
+
+(a) mean
+
+```{r 4.1, echo=FALSE}
+masses <- c(20.48, 35.97, 62.34)
+
+mean_sum <- sum(masses)
+
+mean_sum
+```
+
+<br>
+
+(b) standard deviation of the sum of the masses.
+
+```{r 4.2, echo=FALSE}
+std_devs <- c(0.21, 0.46, 0.54)
+
+std_dev_sum <- sqrt(sum(std_devs^2))
+
+std_dev_sum
+```
+
+## Problem 5
+The credit hour distribution at Metropolitan Technological College is as follows:
+Find 𝜇 and 𝜎2 . Give the 25 (with replacement) possible samples of size 2, their means, and their probabilities.
+
+| x   | 6   | 9   | 12  | 15  | 18  |
+|-----|-----|-----|-----|-----|-----|
+| p(x)| 0.1 | 0.2 | 0.4 | 0.2 | 0.1 |
+
+
+
+```{r}
+x <- c(6, 9, 12, 15, 18)
+p_x <- c(0.1, 0.2, 0.4, 0.2, 0.1)
+
+mu <- sum(x * p_x)
+mu
+
+variance <- sum((x - mu)^2 * p_x)
+variance
+
+samples <- expand.grid(x, x)
+means <- rowMeans(samples)
+probabilities <- expand.grid(p_x, p_x)
+sample_probabilities <- probabilities[,1] * probabilities[,2]
+
+results <- data.frame(Sample1 = samples[,1], Sample2 = samples[,2], 
+                      Mean = means, Probability = sample_probabilities)
+results
+
+sorted_results <- results[order(results$Mean), ]
+sorted_results
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
